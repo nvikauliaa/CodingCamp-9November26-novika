@@ -1,0 +1,332 @@
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --clr-bg:        #f0f2f5;
+  --clr-surface:   #ffffff;
+  --clr-primary:   #6c63ff;
+  --clr-primary-h: #574fd6;
+  --clr-danger:    #e74c3c;
+  --clr-danger-h:  #c0392b;
+  --clr-text:      #1e1e2e;
+  --clr-muted:     #6b7280;
+  --clr-border:    #e5e7eb;
+
+  /* Category colours */
+  --clr-food:      #f97316;
+  --clr-transport: #3b82f6;
+  --clr-fun:       #a855f7;
+
+  --radius:  12px;
+  --shadow:  0 2px 12px rgba(0, 0, 0, 0.08);
+  --transition: 0.2s ease;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+.app-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.app-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   Header & Balance
+   ============================================================ */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.app-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--clr-primary);
+  letter-spacing: -0.5px;
+}
+
+.balance-card {
+  background: var(--clr-primary);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 14px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--shadow);
+  min-width: 180px;
+}
+
+.balance-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+}
+
+.balance-amount {
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   Cards
+   ============================================================ */
+.card {
+  background: var(--clr-surface);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--clr-border);
+}
+
+/* ============================================================
+   Form
+   ============================================================ */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--clr-muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  padding: 10px 14px;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--clr-text);
+  background: var(--clr-bg);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: var(--clr-primary);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+  background: #fff;
+}
+
+input.input-error,
+select.input-error {
+  border-color: var(--clr-danger);
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.12);
+}
+
+.field-error {
+  font-size: 0.78rem;
+  color: var(--clr-danger);
+  margin-top: 4px;
+  min-height: 1em;
+  display: block;
+}
+
+.btn-add {
+  width: 100%;
+  padding: 12px;
+  background: var(--clr-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: background var(--transition), transform var(--transition);
+  margin-top: 4px;
+}
+
+.btn-add:hover {
+  background: var(--clr-primary-h);
+}
+
+.btn-add:active {
+  transform: scale(0.98);
+}
+
+/* ============================================================
+   Transaction List
+   ============================================================ */
+.transaction-list {
+  list-style: none;
+  max-height: 360px;
+  overflow-y: auto;
+  padding-right: 4px;
+
+  /* Subtle scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--clr-border) transparent;
+}
+
+.transaction-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.transaction-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.transaction-list::-webkit-scrollbar-thumb {
+  background: var(--clr-border);
+  border-radius: 99px;
+}
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: var(--clr-bg);
+  border-left: 4px solid transparent;
+  transition: background var(--transition);
+}
+
+.transaction-item:hover {
+  background: #eef0f4;
+}
+
+/* Category accent colours */
+.transaction-item[data-category="Food"]      { border-left-color: var(--clr-food); }
+.transaction-item[data-category="Transport"] { border-left-color: var(--clr-transport); }
+.transaction-item[data-category="Fun"]       { border-left-color: var(--clr-fun); }
+
+.transaction-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.transaction-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.transaction-category {
+  font-size: 0.75rem;
+  color: var(--clr-muted);
+  font-weight: 500;
+}
+
+.transaction-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.transaction-amount {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--clr-danger);
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--clr-muted);
+  font-size: 1.1rem;
+  padding: 4px 6px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: color var(--transition), background var(--transition);
+}
+
+.btn-delete:hover {
+  color: var(--clr-danger);
+  background: rgba(231, 76, 60, 0.1);
+}
+
+/* ============================================================
+   Empty State
+   ============================================================ */
+.empty-state {
+  text-align: center;
+  color: var(--clr-muted);
+  font-size: 0.88rem;
+  padding: 12px 0;
+}
+
+/* ============================================================
+   Chart
+   ============================================================ */
+.chart-card {
+  position: sticky;
+  top: 24px;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+#chart-empty-state {
+  margin-top: 12px;
+}
